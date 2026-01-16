@@ -76,24 +76,37 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
     />
   );
 
-  return <div style={{
-    margin: "10px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px"
-  }}>
-    <ul style={{
-      listStyleType: "none",
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-      gap: "10px",
-      padding: "0",
-      margin: "0"
+  return <>
+    <style>
+      {`
+        .card-list-view__card-list {
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+        @media (max-width: 400pt) {
+          .card-list-view__card-list {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          }
+        }
+      `}
+    </style>
+    <div style={{
+      margin: "10px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px"
     }}>
-      {cardItems}
-    </ul>
-    {Pageination}
-  </div>;
+      <ul className="card-list-view__card-list" style={{
+        listStyleType: "none",
+        display: "grid",
+        gap: "10px",
+        padding: "0",
+        margin: "0"
+      }}>
+        {cardItems}
+      </ul>
+      {Pageination}
+    </div>
+  </>;
 }
 
 return { CardItemCell, CardItem, CardList };
