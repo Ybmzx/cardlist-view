@@ -31,5 +31,29 @@ return function View() {
 }
 ```
 
-<img width="1197" height="772" alt="image" src="https://github.com/user-attachments/assets/48f913a1-b8fe-46da-b380-241819ee7603" />
+<img width="1031" height="742" alt="Clip_20260116_141505" src="https://github.com/user-attachments/assets/831c64aa-6c19-4ed5-9926-84aa4fcb7958" />
+
+
+**Use [Css Snippets](https://help.obsidian.md/snippets):**
+
+```css
+.card-list-view__card-item {
+  border: none !important;
+  border-radius: 10px !important;
+  background-color: rgb(218, 232, 238);
+  box-shadow: 0 0 10px rgba(218, 232, 238, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.card-list-view__card-item:hover {
+  background-color: rgb(236, 218, 238);
+  box-shadow: 0 0 8px rgba(236, 218, 238, 1);
+}
+
+.card-list-view__card-item img {
+  border-radius: 10px;
+}
+```
+
+<img width="1037" height="737" alt="Clip_20260116_141723" src="https://github.com/user-attachments/assets/8a35858e-82c0-43c8-a8bf-c9f24030b9a0" />
 
