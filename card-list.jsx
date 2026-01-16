@@ -1,18 +1,30 @@
-function CardItemCell({ rows, column }) {
-  const value = dc.useMemo(() => column.value(rows), [rows, column.value]);
+function CardItemCell({ row, column }) {
+  const value = dc.useMemo(() => column.value(row), [row, column.value]);
+  const renderable = dc.useMemo(() => {
+    if (column.render) {
+      return column.render(value, row);
+    }
+    return value;
+  }, [value, column.render, row]);
+  const rendered = dc.useMemo(() => {
+    if (dc.preact.isValidElement(renderable)) {
+      return renderable;
+    }
+    return <dc.Literal value={renderable}/>;
+  }, [renderable])
   return <li style={{
       overflowWrap: "break-word",
       padding: "0",
       margin: "0",
     }} className="card-list-view__card-item-cell">
-      <dc.Literal value={value}></dc.Literal>
+      {rendered}
     </li>;
 }
 
-function CardItem({ rows, columns }) {
+function CardItem({ row, columns }) {
   const cols = dc.useMemo(
-    () => columns.map((column) => <CardItemCell rows={rows} column={column}></CardItemCell>)
-  , [rows, columns]);
+    () => columns.map((column) => <CardItemCell row={row} column={column}></CardItemCell>)
+  , [row, columns]);
   return <ul style={{
     listStyleType: "none",
     border: "1px solid #ccc",
@@ -52,7 +64,7 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
 
   const cardItems = dc.useMemo(() => rowsWithPaging.map((row) => {
     return <li style={{ padding: "0", margin: "0" }}>
-      <CardItem rows={row} columns={columns}></CardItem>
+      <CardItem row={row} columns={columns}></CardItem>
     </li>;
   }), [rowsWithPaging, columns]);
 
