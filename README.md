@@ -10,7 +10,10 @@ const { CardList } = await dc.require("path/to/card-list.jsx");
 
 const COLUMNS = [
   { value: (row) => `![Cover](${row.cover})` },
-  { value: (row) => `[[${row.animeName}]]` },
+  {
+	  value: (row) => row.animeName,
+	  render: (value, row) => dc.fileLink(value)
+  }, // equivalent to "{ value: (row) => `[[${row.animeName}]]` }"
   { value: (row) => `**${row.state}**` },
   { value: (row) => `Watched: **${row.watchedEpisode}**` },
   { value: (row) => `**${row.rating ?? '-'}**⭐` },
