@@ -4,7 +4,7 @@ function CardItemCell({ rows, column }) {
       overflowWrap: "break-word",
       padding: "0",
       margin: "0",
-    }}>
+    }} className="card-list-view__card-item-cell">
       <dc.Literal value={value}></dc.Literal>
     </li>;
 }
@@ -18,7 +18,7 @@ function CardItem({ rows, columns }) {
     border: "1px solid #ccc",
     borderRadius: "5px",
     padding: "10px"
-  }}>
+  }} className="card-list-view__card-item">
     {cols}
   </ul>;
 }
@@ -69,6 +69,7 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
 
   const Pageination = options.length > 1 && (
     <dc.VanillaSelect
+      className="card-list-view__card-list-page-select"
       style={{ alignSelf: "flex-end" }}
       options={options}
       defaultValue={current}
@@ -94,13 +95,13 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
       display: "flex",
       flexDirection: "column",
       gap: "10px"
-    }}>
+    }} className="card-list-view__card-list-container">
       <ul className="card-list-view__card-list" style={{
         listStyleType: "none",
         display: "grid",
         gap: "10px",
         padding: "0",
-        margin: "0"
+        margin: "0",
       }}>
         {cardItems}
       </ul>
