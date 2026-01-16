@@ -17,7 +17,8 @@ function CardItem({ rows, columns }) {
     listStyleType: "none",
     border: "1px solid #ccc",
     borderRadius: "5px",
-    padding: "10px"
+    padding: "10px",
+    height: "100%",
   }} className="card-list-view__card-item">
     {cols}
   </ul>;
@@ -81,11 +82,11 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
     <style>
       {`
         .card-list-view__card-list {
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         }
         @media (max-width: 400pt) {
           .card-list-view__card-list {
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
           }
         }
       `}
