@@ -6,7 +6,7 @@ Cardlist view for obsidian datacore plugin.
 ## Usage
 
 ```jsx
-const { CardList } = await dc.require("path/to/card-list.jsx")
+const { CardList } = await dc.require("path/to/card-list.jsx");
 
 const COLUMNS = [
   { value: (row) => `![Cover](${row.cover})` },
