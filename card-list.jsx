@@ -1,3 +1,15 @@
+/*
+The MIT License (MIT)
+
+Copyright © 2026 Ybmzx https://github.com/Ybmzx
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 function CardItemCell({ row, column }) {
   const value = dc.useMemo(() => column.value(row), [row, column.value]);
   const renderable = dc.useMemo(() => {
@@ -36,7 +48,7 @@ function CardItem({ row, columns }) {
   </ul>;
 }
 
-function CardList({ rows, columns, paging = undefined, onPageChange = (page) => { } }) {
+function CardList({ rows, columns, paging = undefined, scrollOnPaging = true, onPageChange = (page) => { } }) {
   if (rows.length === 0) {
     return <div></div>;
   }
@@ -46,9 +58,17 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
   }
 
   const [current, setCurrent] = dc.useState(0);
+  const containerRef = dc.useRef(null);
 
   const handlePageChange = dc.useCallback((page) => {
     const pageNumber = Number(page); // fuck JavaScript
+    if (scrollOnPaging) {
+      containerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
     if (!isNaN(pageNumber)) {
       setCurrent(pageNumber);
       onPageChange(pageNumber);
@@ -108,7 +128,9 @@ function CardList({ rows, columns, paging = undefined, onPageChange = (page) => 
       display: "flex",
       flexDirection: "column",
       gap: "10px"
-    }} className="card-list-view__card-list-container">
+    }}
+    ref={containerRef}
+    className="card-list-view__card-list-container">
       <ul className="card-list-view__card-list" style={{
         listStyleType: "none",
         display: "grid",
