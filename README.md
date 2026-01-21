@@ -29,7 +29,13 @@ return function View() {
   // paging - the number of items per page, undefined for no paging
   return <>
     <h1>Animes</h1>
-    <CardList rows={animes} columns={COLUMNS} paging={5} onPageChange={(pageNumber) => console.log(pageNumber)}></CardList>
+    <CardList
+		rows={animes}
+		columns={COLUMNS}
+		paging={5}
+		scrollOnPaging={true}
+		onPageChange={(pageNumber) => console.log(pageNumber)}>
+	</CardList>
   </>;
 }
 ```
